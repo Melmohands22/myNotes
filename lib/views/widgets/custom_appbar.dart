@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nots_app/views/constants.dart';
+import 'package:nots_app/constants.dart';
 
 AppBar CustomAppbar() {
   return AppBar(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nots_app/views/constants.dart';
+import 'package:nots_app/constants.dart';
 
 class EmptyShow extends StatelessWidget {
   const EmptyShow({

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:nots_app/views/constants.dart';
-import 'package:nots_app/views/empty_show.dart';
+import 'package:nots_app/constants.dart';
+import 'package:nots_app/views/widgets/empty_show.dart';
 import 'package:nots_app/views/widgets/custom_appbar.dart';
 
 class NotesView extends StatefulWidget {
