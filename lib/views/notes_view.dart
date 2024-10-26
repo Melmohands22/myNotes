@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:nots_app/views/constants.dart';
+import 'package:nots_app/views/empty_show.dart';
 import 'package:nots_app/views/widgets/custom_appbar.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({super.key});
@@ -24,21 +25,15 @@ class _NotesViewState extends State<NotesView> {
         children: [
           SizedBox(
             width: double.infinity,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 110,
-                ),
-                Image.asset("assets/images/rafiki.png"),
-                Text(
-                  "Create your first note !",
-                  style: GoogleFonts.nunito(
-                    fontSize: 20,
-                    color: kWhiteColor,
-                  ),
-                ),
-              ],
-            ),
+            child: EmptyShow(),
+          ),
+          MasonryGridView.builder(
+            gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
+            itemCount: 4,
+            itemBuilder: (context, index) {
+              return CustomNotesCard();
+            },
           ),
           Positioned(
             bottom: 60,
@@ -118,9 +113,47 @@ class _NotesViewState extends State<NotesView> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text('Save'),
+            child: const Text(
+              'Save',
+              style: TextStyle(color: Color.fromARGB(255, 214, 6, 218)),
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomNotesCard extends StatelessWidget {
+  const CustomNotesCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: Colors.blueAccent,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "title",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 12),
+            Text(
+              "subtitle",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
+              DateTime.now().toString(),
+              style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+            ),
+          ],
+        ),
       ),
     );
   }
