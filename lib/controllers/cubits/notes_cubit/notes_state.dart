@@ -5,7 +5,7 @@ sealed class NotesState {}
 
 final class NotesInitial extends NotesState {}
 
-final class NotesSuccses extends NotesState {}
+final class NotesSuccess extends NotesState {}
 
 final class NotesFailure extends NotesState {
   final String errMessage;
