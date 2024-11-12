@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:nots_app/constants.dart';
@@ -69,7 +70,7 @@ class _EditNoteViewState extends State<EditNoteView> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding:  EdgeInsets.all(16.h),
         child: Form(
           key: formKey,
           autovalidateMode: autovalidateMode,
@@ -88,7 +89,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                 style: const TextStyle(color: Colors.white),
                 maxLines: 2,
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               TextFormField(
                 controller: subtitleController,
                 onSaved: (value) => subtitle = value,
@@ -102,11 +103,11 @@ class _EditNoteViewState extends State<EditNoteView> {
                 style: const TextStyle(color: Colors.white),
                 maxLines: 5,
               ),
-              const SizedBox(height: 30),
+               SizedBox(height: 30.h),
               Padding(
-                padding: const EdgeInsets.all(6.0),
+                padding:  EdgeInsets.all(6.0.h),
                 child: SizedBox(
-                  height: 30,
+                  height: 30.h,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -125,8 +126,8 @@ class _EditNoteViewState extends State<EditNoteView> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 40,
+               SizedBox(
+                height: 40.h,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -167,11 +168,11 @@ class _EditNoteViewState extends State<EditNoteView> {
       filled: true,
       fillColor: Colors.grey[800],
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.sp),
         borderSide: BorderSide(color: Colors.transparent),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.sp),
         borderSide: BorderSide(color: Colors.red),
       ),
     );

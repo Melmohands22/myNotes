@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/controllers/cubits/notes_cubit/notes_cubit.dart';
@@ -28,13 +29,18 @@ class MyNotes extends StatelessWidget {
           create: (context) => AddNotesCubit(),
         ),
       ],
-      child: MaterialApp(
-        routes: {
-          EditNoteView.id: (context) => EditNoteView(),
+      child: ScreenUtilInit(
+        designSize: Size(375, 812),
+        builder: (context, child) {
+          return MaterialApp(
+            routes: {
+              EditNoteView.id: (context) => EditNoteView(),
+            },
+            color: kDarkColor,
+            debugShowCheckedModeBanner: false,
+            home: NotesView(),
+          );
         },
-        color: kDarkColor,
-        debugShowCheckedModeBanner: false,
-        home: NotesView(),
       ),
     );
   }

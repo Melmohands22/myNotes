@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
@@ -69,16 +70,16 @@ class CustomNotesCard extends StatelessWidget {
       },
       background: Container(
         alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
+        padding: EdgeInsets.only(right: 20.h),
         color: Colors.red,
-        child: const Icon(
+        child: Icon(
           Icons.delete,
           color: Colors.white,
-          size: 38,
+          size: 38.h,
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(top: 12),
+        padding: EdgeInsets.only(top: 12.h),
         child: GestureDetector(
           onTap: () {
             Navigator.pushNamed(
@@ -95,33 +96,35 @@ class CustomNotesCard extends StatelessWidget {
           child: ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width * 0.5,
-              minHeight: 100, // Set a reasonable minHeight
+              minHeight: 100.h,
             ),
             child: Card(
               color: Color(note.color),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min, // Constrain height to fit content
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       note.title,
                       style: GoogleFonts.playfairDisplay(
                         color: Color(0xff024959),
-                        fontSize: 18,
+                        fontSize: 18.sp,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    SizedBox(height: 12.h),
                     Text(
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 5,
                       note.subtitle,
-                      style: const TextStyle(fontSize: 18),
+                      style: TextStyle(fontSize: 18.sp),
                     ),
-                    const SizedBox(height: 8),
+                    SizedBox(height: 8.w),
                     Text(
                       note.date,
-                      style: const TextStyle(
-                        fontSize: 12,
+                      style: TextStyle(
+                        fontSize: 12.w,
                         color: Color.fromARGB(255, 50, 47, 47),
                       ),
                     ),

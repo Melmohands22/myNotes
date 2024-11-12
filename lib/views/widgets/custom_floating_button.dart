@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/views/widgets/custom_show_dialog.dart';
 class FloatinfButton extends StatefulWidget {
@@ -10,7 +11,7 @@ class FloatinfButton extends StatefulWidget {
 
 class _FloatinfButtonState extends State<FloatinfButton> {
   void createNote() {
-    print("Floating Action Button Pressed");  // Debugging print
+   
     showDialog(
       context: context,
       builder: (context) => const CustomShowDialog(),
@@ -20,17 +21,17 @@ class _FloatinfButtonState extends State<FloatinfButton> {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 60,
-      right: 16,  // Adjusted positioning for better visibility
+      bottom: 60.h,
+      right: 16.h,  
       child: FloatingActionButton(
         backgroundColor: kDarkColor,
         onPressed: createNote,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(48.r),
         ),
         child: Icon(
           Icons.add,
-          size: 48,
+          size: 48.h,
           color: kWhiteColor,
         ),
       ),

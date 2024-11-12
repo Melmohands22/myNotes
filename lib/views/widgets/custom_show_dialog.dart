@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
@@ -41,14 +42,14 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
     return AlertDialog(
       backgroundColor: Colors.grey[900],
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.sp),
       ),
       content: Form(
         key: formKey,
         autovalidateMode: autovalidateMode,
         child: SizedBox(
-          height: 320,
-          width: 300,
+          height: 320.h,
+          width: 300.w,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -64,7 +65,7 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
                 style: const TextStyle(color: Colors.white),
                 maxLines: 2,
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               TextFormField(
                 onSaved: (value) => subtitle = value,
                 validator: (value) {
@@ -77,9 +78,9 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
                 style: const TextStyle(color: Colors.white),
                 maxLines: 5,
               ),
-              const SizedBox(height: 20),
+               SizedBox(height: 20.h),
               SizedBox(
-                height: 30,
+                height: 30.h,
                 child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
@@ -140,11 +141,11 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
       filled: true,
       fillColor: Colors.grey[800],
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.sp),
         borderSide: BorderSide(color: Colors.transparent),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(15.sp),
         borderSide: BorderSide(color: Colors.red),
       ),
     );
