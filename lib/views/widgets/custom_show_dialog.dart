@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/models/note_model.dart';
+import 'package:intl/intl.dart';
+import 'package:nots_app/views/widgets/colors_item.dart';
 
 class CustomShowDialog extends StatefulWidget {
   const CustomShowDialog({super.key});
@@ -12,6 +16,26 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   String? title, subtitle;
+  NoteModel? noteModel;
+
+  final List<Color> colors = [
+    Colors.blueAccent,
+    Colors.redAccent,
+    Color(0xff732D1A),
+    Colors.orangeAccent,
+    Colors.purpleAccent,
+    Color(0xffF5E6AF),
+    Colors.tealAccent,
+    Color(0xff486241),
+    Colors.cyanAccent,
+    Colors.indigoAccent,
+    Colors.lightGreenAccent,
+    Colors.deepOrangeAccent,
+    Color(0xff7A577A),
+  ];
+
+  Color selectedColor = Colors.blueAccent;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -23,7 +47,7 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
         key: formKey,
         autovalidateMode: autovalidateMode,
         child: SizedBox(
-          height: 300,
+          height: 320,
           width: 300,
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -31,7 +55,7 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
               TextFormField(
                 onSaved: (value) => title = value,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Title is required';
                   }
                   return null;
@@ -44,7 +68,7 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
               TextFormField(
                 onSaved: (value) => subtitle = value,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Subtitle is required';
                   }
                   return null;
@@ -52,6 +76,26 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
                 decoration: _inputDecoration('Enter your note subtitle'),
                 style: const TextStyle(color: Colors.white),
                 maxLines: 5,
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                height: 30,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: colors.map((color) {
+                      return ColorsItem(
+                        color: color,
+                        isSelected: color == selectedColor,
+                        onTap: () {
+                          setState(() {
+                            selectedColor = color;
+                          });
+                        },
+                      );
+                    }).toList(),
+                  ),
+                ),
               ),
             ],
           ),
@@ -62,6 +106,17 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
           onPressed: () {
             if (formKey.currentState!.validate()) {
               formKey.currentState!.save();
+
+              final newNote = NoteModel(
+                selectedColor.value,
+                title: title!,
+                subtitle: subtitle!,
+                date: DateFormat('HH:mm    dd-MM-yyyy').format(DateTime.now()),
+              );
+
+              var notesBox = Hive.box<NoteModel>(kNotesBok);
+              notesBox.add(newNote);
+
               Navigator.of(context).pop();
             } else {
               setState(() {
@@ -77,7 +132,8 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
       ],
     );
   }
- InputDecoration _inputDecoration(String hint) {
+
+  InputDecoration _inputDecoration(String hint) {
     return InputDecoration(
       hintText: hint,
       hintStyle: TextStyle(color: Colors.grey[400]),
@@ -87,21 +143,9 @@ class _CustomShowDialogState extends State<CustomShowDialog> {
         borderRadius: BorderRadius.circular(15),
         borderSide: BorderSide(color: Colors.transparent),
       ),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.transparent),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.blue), 
-      ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.red), 
-      ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(15),
-        borderSide: BorderSide(color: Colors.red), 
+        borderSide: BorderSide(color: Colors.red),
       ),
     );
   }
