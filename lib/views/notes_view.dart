@@ -5,7 +5,7 @@ import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/custom_floating_button.dart';
 import 'package:nots_app/views/widgets/custom_note_card.dart';
-import 'package:nots_app/views/widgets/empty_show.dart';
+import 'package:nots_app/views/empty_show.dart';
 import 'package:nots_app/views/widgets/custom_appbar.dart';
 
 class NotesView extends StatefulWidget {
@@ -22,7 +22,7 @@ class _NotesViewState extends State<NotesView> {
 
     return Scaffold(
       backgroundColor: kDarkColor,
-      appBar: CustomAppbar(),
+      appBar: CustomAppbar(context),
       body: ValueListenableBuilder(
         valueListenable: notesBox.listenable(),
         builder: (context, Box<NoteModel> box, _) {
@@ -73,7 +73,9 @@ class Notes extends StatelessWidget {
           note: note,
           onDelete: () async {
             await box.deleteAt(index);
-          }, index: index,
+          },
+          index: index,
+          onUpdate: () {},
         );
       },
     );

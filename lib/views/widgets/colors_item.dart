@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nots_app/constants.dart';
 
 class ColorsItem extends StatelessWidget {
   final Color color;
@@ -20,7 +21,7 @@ class ColorsItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: CircleAvatar(
           backgroundColor: color,
-          child: isSelected ? Icon(Icons.check, color: Colors.black) : null,
+          child: isSelected ? Icon(Icons.check, color: kWhiteColor) : null,
         ),
       ),
     );

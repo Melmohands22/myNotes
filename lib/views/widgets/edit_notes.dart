@@ -69,92 +69,96 @@ class _EditNoteViewState extends State<EditNoteView> {
           style: TextStyle(color: kWhiteColor),
         ),
       ),
-      body: Padding(
-        padding:  EdgeInsets.all(16.h),
-        child: Form(
-          key: formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: titleController,
-                onSaved: (value) => title = value,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Title is required';
-                  }
-                  return null;
-                },
-                decoration: _inputDecoration('Enter your note title'),
-                style: const TextStyle(color: Colors.white),
-                maxLines: 2,
-              ),
-               SizedBox(height: 20.h),
-              TextFormField(
-                controller: subtitleController,
-                onSaved: (value) => subtitle = value,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Subtitle is required';
-                  }
-                  return null;
-                },
-                decoration: _inputDecoration('Enter your note subtitle'),
-                style: const TextStyle(color: Colors.white),
-                maxLines: 5,
-              ),
-               SizedBox(height: 30.h),
-              Padding(
-                padding:  EdgeInsets.all(6.0.h),
-                child: SizedBox(
-                  height: 30.h,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      children: colors.map((color) {
-                        return ColorsItem(
-                          color: color,
-                          isSelected: color == selectedColor,
-                          onTap: () {
-                            setState(() {
-                              selectedColor = color;
-                            });
-                          },
-                        );
-                      }).toList(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.h),
+          child: Form(
+            key: formKey,
+            autovalidateMode: autovalidateMode,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: titleController,
+                  onSaved: (value) => title = value,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Title is required';
+                    }
+                    return null;
+                  },
+                  decoration: _inputDecoration('Enter your note title'),
+                  style: const TextStyle(color: Colors.white),
+                  maxLines: 2,
+                ),
+                SizedBox(height: 20.h),
+                TextFormField(
+                  controller: subtitleController,
+                  onSaved: (value) => subtitle = value,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Subtitle is required';
+                    }
+                    return null;
+                  },
+                  decoration: _inputDecoration('Enter your note subtitle'),
+                  style: const TextStyle(color: Colors.white),
+                  maxLines: 8,
+                ),
+                SizedBox(height: 30.h),
+                Padding(
+                  padding: EdgeInsets.all(6.0.h),
+                  child: SizedBox(
+                    height: 40.h,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: colors.map((color) {
+                          return ColorsItem(
+                            color: color,
+                            isSelected: color == selectedColor,
+                            onTap: () {
+                              setState(() {
+                                selectedColor = color;
+                              });
+                            },
+                          );
+                        }).toList(),
+                      ),
                     ),
                   ),
                 ),
-              ),
-               SizedBox(
-                height: 40.h,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
+                SizedBox(
+                  height: 40.h,
+                ),
+                ElevatedButton(
+  onPressed: () {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
 
-                    final newNote = NoteModel(
-                      selectedColor.value,
-                      title: title!,
-                      subtitle: subtitle!,
-                      date: DateFormat('HH:mm    dd-MM-yyyy')
-                          .format(DateTime.now()),
-                    );
+      final newNote = NoteModel(
+        selectedColor.value,
+        title: title!,
+        subtitle: subtitle!,
+        date: DateFormat('HH:mm    dd-MM-yyyy')
+            .format(DateTime.now()),
+      );
 
-                    var notesBox = Hive.box<NoteModel>(kNotesBok);
-                    notesBox.putAt(index!, newNote);
+      var notesBox = Hive.box<NoteModel>(kNotesBok);
+      notesBox.putAt(index!, newNote);
 
-                    Navigator.of(context).pop();
-                  } else {
-                    setState(() {
-                      autovalidateMode = AutovalidateMode.onUserInteraction;
-                    });
-                  }
-                },
-                child: const Text('Save'),
-              ),
-            ],
+      
+      Navigator.pop(context, true);
+    } else {
+      setState(() {
+        autovalidateMode = AutovalidateMode.onUserInteraction;
+      });
+    }
+  },
+  child: const Text('Save'),
+),
+
+              ],
+            ),
           ),
         ),
       ),

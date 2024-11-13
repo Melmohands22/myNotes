@@ -2,26 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/edit_notes.dart';
 
-class NotesGridView extends StatefulWidget {
-  const NotesGridView({super.key});
+class NotesGridView extends StatelessWidget {
+  final List<NoteModel> notes;
+  final VoidCallback onUpdate; 
 
-  @override
-  _NotesGridViewState createState() => _NotesGridViewState();
-}
-
-class _NotesGridViewState extends State<NotesGridView> {
-  late Box<NoteModel> box;
-
-  @override
-  void initState() {
-    super.initState();
-    box = Hive.box<NoteModel>(kNotesBok);
-  }
+  const NotesGridView({
+    super.key,
+    required this.notes,
+    required this.onUpdate, 
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,74 +22,79 @@ class _NotesGridViewState extends State<NotesGridView> {
       gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
       ),
-      itemCount: box.length,
+      itemCount: notes.length,
       itemBuilder: (context, index) {
-        final note = box.getAt(index) as NoteModel;
+        final note = notes[index];
 
         return CustomNotesCard(
           note: note,
           onDelete: () async {
-            await box.deleteAt(index);
-
-            setState(() {});
+            // Action for deleting the note
           },
+          onUpdate: onUpdate, 
           index: index,
         );
       },
     );
   }
 }
-
 class CustomNotesCard extends StatelessWidget {
   final NoteModel note;
   final Future<void> Function() onDelete;
+  final VoidCallback onUpdate;
   final int index;
 
   const CustomNotesCard({
     super.key,
     required this.note,
     required this.onDelete,
+    required this.onUpdate, 
     required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
-      key: ValueKey(note.key),
-      direction: DismissDirection.endToStart,
-      confirmDismiss: (direction) async {
-        await onDelete();
-        return true;
-      },
-      background: Container(
-        alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 20.h),
-        color: Colors.red,
-        child: Icon(
-          Icons.delete,
-          color: Colors.white,
-          size: 38.h,
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.only(top: 12.h),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(
-              context,
-              EditNoteView.id,
-              arguments: {
-                'index': index,
-                'color': note.color,
-                'title': note.title,
-                'subtitle': note.subtitle,
-              },
-            );
+    return GestureDetector(
+      onTap: () async {
+        final result = await Navigator.pushNamed(
+          context,
+          EditNoteView.id,
+          arguments: {
+            'index': index,
+            'color': note.color,
+            'title': note.title,
+            'subtitle': note.subtitle,
           },
+        );
+
+       
+        if (result == true) {
+          onUpdate();
+        }
+      },
+      child: Dismissible(
+        key: ValueKey(note.key),
+        direction: DismissDirection.horizontal,
+        confirmDismiss: (direction) async {
+          await onDelete();
+          return true;
+        },
+        background: Container(
+          alignment: Alignment.centerRight,
+          padding: EdgeInsets.only(right: 30.h),
+          color: Colors.red,
+          child: Icon(
+            Icons.delete,
+            color: kWhiteColor,
+            size: 42.h,
+          ),
+        ),
+        child: Padding(
+          padding: EdgeInsets.only(top: 12.h),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.5,
-              minHeight: 100.h,
+              maxWidth: 200.w,
+              minHeight: 120.h,
             ),
             child: Card(
               color: Color(note.color),
@@ -138,3 +136,4 @@ class CustomNotesCard extends StatelessWidget {
     );
   }
 }
+

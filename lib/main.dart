@@ -7,6 +7,7 @@ import 'package:nots_app/controllers/cubits/notes_cubit/notes_cubit.dart';
 import 'package:nots_app/models/note_model.dart';
 
 import 'package:nots_app/views/notes_view.dart';
+import 'package:nots_app/views/search_view.dart';
 import 'package:nots_app/views/widgets/edit_notes.dart';
 
 void main() async {
@@ -35,6 +36,7 @@ class MyNotes extends StatelessWidget {
           return MaterialApp(
             routes: {
               EditNoteView.id: (context) => EditNoteView(),
+              SearchView.id: (context) => SearchView(),
             },
             color: kDarkColor,
             debugShowCheckedModeBanner: false,
