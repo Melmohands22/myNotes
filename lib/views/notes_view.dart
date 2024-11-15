@@ -9,7 +9,9 @@ import 'package:nots_app/views/empty_show.dart';
 import 'package:nots_app/views/widgets/custom_appbar.dart';
 
 class NotesView extends StatefulWidget {
-  const NotesView({super.key});
+  const NotesView({
+    super.key,
+  });
 
   @override
   State<NotesView> createState() => _NotesViewState();
@@ -22,7 +24,7 @@ class _NotesViewState extends State<NotesView> {
 
     return Scaffold(
       backgroundColor: kDarkColor,
-      appBar: CustomAppbar(context),
+      appBar: CustomAppBar(),
       body: ValueListenableBuilder(
         valueListenable: notesBox.listenable(),
         builder: (context, Box<NoteModel> box, _) {
