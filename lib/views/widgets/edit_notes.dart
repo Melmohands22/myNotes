@@ -32,14 +32,15 @@ class _EditNoteViewState extends State<EditNoteView> {
     Color(0xff732D1A),
     Colors.orangeAccent,
     Colors.purpleAccent,
-    Color(0xffF5E6AF),
-    Colors.tealAccent,
+    Color(0xffC2C0A6),
+    Color(0xff4B4952),
     Color(0xff486241),
-    Colors.cyanAccent,
-    Colors.indigoAccent,
-    Colors.lightGreenAccent,
-    Colors.deepOrangeAccent,
+    Color(0xff03A688),
+    Color(0xff7A6D31),
+    Color(0xffA8B545),
     Color(0xff7A577A),
+    Color(0xff8C034E),
+    Color(0xff001542),
   ];
 
   Color selectedColor = Colors.blueAccent;

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nots_app/constants.dart';
 import 'package:nots_app/controllers/cubits/theme_cubit/theme_cubit.dart';
+import 'package:nots_app/views/widgets/delete_notes_alarm.dart';
 
 class SettingDialog extends StatefulWidget {
   const SettingDialog({super.key});
@@ -127,7 +127,12 @@ class _SettingDialogState extends State<SettingDialog> {
               Padding(
                 padding: EdgeInsets.only(top: 12.h, right: 20.h),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => const DeleteNotesAlarm(),
+                    );
+                  },
                   icon: FaIcon(
                     FontAwesomeIcons.trashCan,
                     size: 28,

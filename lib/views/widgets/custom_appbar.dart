@@ -14,7 +14,6 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
-  late bool _isSelected;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -38,7 +37,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           icon: Icon(
             Icons.search,
             color: Theme.of(context).iconTheme.color,
-            size: 24.h,
+            size: 28.h,
           ),
         ),
         SizedBox(width: 10.w),
@@ -52,7 +51,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           icon: Icon(
             Icons.settings,
             color: Theme.of(context).iconTheme.color,
-            size: 24.h,
+            size: 28.h,
           ),
         ),
       ],

@@ -46,8 +46,8 @@ class _MyNotesState extends State<MyNotes> {
             builder: (context, themeMode) {
               return MaterialApp(
                 theme: lightTheme,
-  darkTheme: darkTheme,
-  themeMode: context.watch<ThemeCubit>().state,
+                darkTheme: darkTheme,
+                themeMode: context.watch<ThemeCubit>().state,
                 routes: {
                   EditNoteView.id: (context) => EditNoteView(),
                   SearchView.id: (context) => SearchView(),

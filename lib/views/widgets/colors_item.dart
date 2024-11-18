@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nots_app/constants.dart';
 
 class ColorsItem extends StatelessWidget {
   final Color color;

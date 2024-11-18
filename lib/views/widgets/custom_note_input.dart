@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nots_app/constants.dart';
 import 'package:nots_app/controllers/utils/custom_button.dart';
 import 'package:nots_app/views/widgets/colors_item.dart';
 
@@ -18,14 +17,15 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
     Color(0xff732D1A),
     Colors.orangeAccent,
     Colors.purpleAccent,
-    Color(0xffF5E6AF),
-    Colors.tealAccent,
+    Color(0xffC2C0A6),
+    Color(0xff4B4952),
     Color(0xff486241),
-    Colors.cyanAccent,
-    Colors.indigoAccent,
-    Colors.lightGreenAccent,
-    Colors.deepOrangeAccent,
+    Color(0xff03A688),
+    Color(0xff7A6D31),
+    Color(0xffA8B545),
     Color(0xff7A577A),
+    Color(0xff8C034E),
+    Color(0xff001542),
   ];
 
   Color selectedColor = Colors.blueAccent;
@@ -73,7 +73,9 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
                 return null;
               },
               decoration: _inputDecoration('Enter your note subtitle'),
-              style:  TextStyle(color:Theme.of(context).textTheme.bodyLarge?.color,),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
               maxLines: 5,
               textDirection: _getTextDirection(subtitleController.text),
               onChanged: (_) {
@@ -130,9 +132,9 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
   InputDecoration _inputDecoration(String hint) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: TextStyle(color: Colors.grey[400]),
+      hintStyle: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
       filled: true,
-      fillColor: Colors.grey[800],
+      fillColor: Theme.of(context).scaffoldBackgroundColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.r),
         borderSide: BorderSide(color: Colors.transparent),

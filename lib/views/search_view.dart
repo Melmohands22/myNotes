@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/custom_note_card.dart';
 import 'package:nots_app/views/widgets/search_appbar.dart';
-import 'package:hive/hive.dart';
-import 'package:nots_app/models/note_model.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -23,12 +23,13 @@ class _SearchViewState extends State<SearchView> {
   void initState() {
     super.initState();
     box = Hive.box<NoteModel>(kNotesBok);
+    filteredNotes = box.values.toList(); 
   }
 
   void searchNotes(String query) {
     if (query.isEmpty) {
       setState(() {
-        filteredNotes = [];
+        filteredNotes = box.values.toList(); 
       });
     } else {
       final notes = box.values.where((note) {
@@ -47,25 +48,38 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
+    final hasNotes = box.isNotEmpty;
+
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: SearchAppBar(
         searchController: searchController,
         onSearch: searchNotes,
       ),
-      body: filteredNotes.isEmpty && searchController.text.isEmpty
+      body: !hasNotes
           ? Center(
               child: Text(
-                'What are you searching for..?',
+                'No notes available. Add some notes first!',
                 style: TextStyle(
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
-                    fontSize: 18.sp),
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
+                  fontSize: 18.sp,
+                ),
               ),
             )
-          : NotesGridView(
-              notes: filteredNotes,
-              onUpdate: updateNotes,
-            ),
+          : (filteredNotes.isEmpty && searchController.text.isNotEmpty)
+              ? Center(
+                  child: Text(
+                    'No results found for "${searchController.text}".',
+                    style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color,
+                      fontSize: 18.sp,
+                    ),
+                  ),
+                )
+              : NotesGridView(
+                  notes: filteredNotes,
+                  onUpdate: updateNotes,
+                ),
     );
   }
 }
