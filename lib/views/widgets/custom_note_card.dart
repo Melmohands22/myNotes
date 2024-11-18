@@ -8,12 +8,12 @@ import 'package:nots_app/views/widgets/edit_notes.dart';
 
 class NotesGridView extends StatelessWidget {
   final List<NoteModel> notes;
-  final VoidCallback onUpdate; 
+  final VoidCallback onUpdate;
 
   const NotesGridView({
     super.key,
     required this.notes,
-    required this.onUpdate, 
+    required this.onUpdate,
   });
 
   @override
@@ -28,16 +28,15 @@ class NotesGridView extends StatelessWidget {
 
         return CustomNotesCard(
           note: note,
-          onDelete: () async {
-            // Action for deleting the note
-          },
-          onUpdate: onUpdate, 
+          onDelete: () async {},
+          onUpdate: onUpdate,
           index: index,
         );
       },
     );
   }
 }
+
 class CustomNotesCard extends StatelessWidget {
   final NoteModel note;
   final Future<void> Function() onDelete;
@@ -48,7 +47,7 @@ class CustomNotesCard extends StatelessWidget {
     super.key,
     required this.note,
     required this.onDelete,
-    required this.onUpdate, 
+    required this.onUpdate,
     required this.index,
   });
 
@@ -67,7 +66,6 @@ class CustomNotesCard extends StatelessWidget {
           },
         );
 
-       
         if (result == true) {
           onUpdate();
         }
@@ -107,7 +105,7 @@ class CustomNotesCard extends StatelessWidget {
                     Text(
                       note.title,
                       style: GoogleFonts.playfairDisplay(
-                        color: Color(0xff024959),
+                        color: Theme.of(context).textTheme.bodyLarge?.color,
                         fontSize: 18.sp,
                       ),
                     ),
@@ -136,4 +134,3 @@ class CustomNotesCard extends StatelessWidget {
     );
   }
 }
-

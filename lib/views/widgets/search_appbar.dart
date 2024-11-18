@@ -16,16 +16,17 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: BackButton(
-        color: kWhiteColor,
+        color: Theme.of(context).iconTheme.color,
       ),
-      backgroundColor: kDarkColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       title: TextFormField(
         controller: searchController,
         onChanged: onSearch,
         decoration: InputDecoration(
-          hintStyle: TextStyle(color: Colors.grey[400]),
+          hintStyle:
+              TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
           filled: true,
-          fillColor: Colors.grey[800],
+          fillColor: Theme.of(context).scaffoldBackgroundColor,
           hintText: "Search",
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.r)),

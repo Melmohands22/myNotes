@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/controllers/cubits/notes_cubit/notes_cubit.dart';
+import 'package:nots_app/controllers/cubits/theme_cubit/theme_cubit.dart';
 import 'package:nots_app/models/note_model.dart';
 
 import 'package:nots_app/views/notes_view.dart';
@@ -34,18 +35,28 @@ class _MyNotesState extends State<MyNotes> {
         BlocProvider(
           create: (context) => AddNotesCubit(),
         ),
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        )
       ],
       child: ScreenUtilInit(
         designSize: Size(375, 812),
         builder: (context, child) {
-          return MaterialApp(
-            routes: {
-              EditNoteView.id: (context) => EditNoteView(),
-              SearchView.id: (context) => SearchView(),
+          return BlocBuilder<ThemeCubit, ThemeMode>(
+            builder: (context, themeMode) {
+              return MaterialApp(
+                theme: lightTheme,
+  darkTheme: darkTheme,
+  themeMode: context.watch<ThemeCubit>().state,
+                routes: {
+                  EditNoteView.id: (context) => EditNoteView(),
+                  SearchView.id: (context) => SearchView(),
+                },
+                color: kDarkColor,
+                debugShowCheckedModeBanner: false,
+                home: NotesView(),
+              );
             },
-            color: kDarkColor,
-            debugShowCheckedModeBanner: false,
-            home: NotesView(),
           );
         },
       ),

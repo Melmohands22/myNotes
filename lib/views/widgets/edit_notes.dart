@@ -60,15 +60,17 @@ class _EditNoteViewState extends State<EditNoteView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kDarkColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         leading: BackButton(
-          color: kWhiteColor,
+          color: Theme.of(context).iconTheme.color,
         ),
-        backgroundColor: kDarkColor,
-        title: const Text(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        title: Text(
           'Edit Note',
-          style: TextStyle(color: kWhiteColor),
+          style: TextStyle(
+            color: Theme.of(context).textTheme.bodyLarge?.color,
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -89,7 +91,8 @@ class _EditNoteViewState extends State<EditNoteView> {
                     return null;
                   },
                   decoration: _inputDecoration('Enter your note title'),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color),
                   maxLines: 2,
                   textDirection: getTextDirection(titleController.text),
                   onChanged: (_) {
@@ -107,7 +110,8 @@ class _EditNoteViewState extends State<EditNoteView> {
                     return null;
                   },
                   decoration: _inputDecoration('Enter your note subtitle'),
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.bodyLarge?.color),
                   maxLines: 8,
                   textDirection: getTextDirection(subtitleController.text),
                   onChanged: (_) {
@@ -176,9 +180,9 @@ class _EditNoteViewState extends State<EditNoteView> {
   InputDecoration _inputDecoration(String hint) {
     return InputDecoration(
       hintText: hint,
-      hintStyle: TextStyle(color: Colors.grey[400]),
+      hintStyle: TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
       filled: true,
-      fillColor: Colors.grey[800],
+      fillColor: Theme.of(context).scaffoldBackgroundColor,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(15.sp),
         borderSide: BorderSide(color: Colors.transparent),

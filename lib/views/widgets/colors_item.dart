@@ -21,7 +21,9 @@ class ColorsItem extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 4.0),
         child: CircleAvatar(
           backgroundColor: color,
-          child: isSelected ? Icon(Icons.check, color: kWhiteColor) : null,
+          child: isSelected
+              ? Icon(Icons.check, color: Theme.of(context).iconTheme.color)
+              : null,
         ),
       ),
     );

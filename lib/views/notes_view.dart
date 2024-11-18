@@ -23,7 +23,7 @@ class _NotesViewState extends State<NotesView> {
     var notesBox = Hive.box<NoteModel>(kNotesBok);
 
     return Scaffold(
-      backgroundColor: kDarkColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(),
       body: ValueListenableBuilder(
         valueListenable: notesBox.listenable(),

@@ -13,6 +13,7 @@ class SearchView extends StatefulWidget {
   @override
   State<SearchView> createState() => _SearchViewState();
 }
+
 class _SearchViewState extends State<SearchView> {
   late Box<NoteModel> box;
   List<NoteModel> filteredNotes = [];
@@ -40,15 +41,14 @@ class _SearchViewState extends State<SearchView> {
     }
   }
 
-  
   void updateNotes() {
-    searchNotes(searchController.text);  
+    searchNotes(searchController.text);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kDarkColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: SearchAppBar(
         searchController: searchController,
         onSearch: searchNotes,
@@ -57,12 +57,14 @@ class _SearchViewState extends State<SearchView> {
           ? Center(
               child: Text(
                 'What are you searching for..?',
-                style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                style: TextStyle(
+                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                    fontSize: 18.sp),
               ),
             )
           : NotesGridView(
               notes: filteredNotes,
-              onUpdate: updateNotes, 
+              onUpdate: updateNotes,
             ),
     );
   }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nots_app/constants.dart';
 import 'package:nots_app/views/search_view.dart';
 import 'package:nots_app/views/widgets/setting_dialog.dart';
 
@@ -19,7 +18,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: kDarkColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       title: Padding(
         padding: EdgeInsets.only(left: 8.0.h),
         child: Text(
@@ -27,7 +26,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           style: TextStyle(
             fontSize: 43.sp,
             fontWeight: FontWeight.w300,
-            color: kWhiteColor,
+            color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
         ),
       ),
@@ -38,7 +37,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           },
           icon: Icon(
             Icons.search,
-            color: kWhiteColor,
+            color: Theme.of(context).iconTheme.color,
             size: 24.h,
           ),
         ),
@@ -52,7 +51,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
           },
           icon: Icon(
             Icons.settings,
-            color: kWhiteColor,
+            color: Theme.of(context).iconTheme.color,
             size: 24.h,
           ),
         ),

@@ -54,7 +54,9 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
                 return null;
               },
               decoration: _inputDecoration('Enter your note title'),
-              style: const TextStyle(color: kWhiteColor),
+              style: TextStyle(
+                color: Theme.of(context).textTheme.bodyLarge?.color,
+              ),
               maxLines: 2,
               textDirection: _getTextDirection(titleController.text),
               onChanged: (_) {
@@ -71,7 +73,7 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
                 return null;
               },
               decoration: _inputDecoration('Enter your note subtitle'),
-              style: const TextStyle(color: kWhiteColor),
+              style:  TextStyle(color:Theme.of(context).textTheme.bodyLarge?.color,),
               maxLines: 5,
               textDirection: _getTextDirection(subtitleController.text),
               onChanged: (_) {
