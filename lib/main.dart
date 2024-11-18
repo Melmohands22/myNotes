@@ -27,7 +27,6 @@ class MyNotes extends StatefulWidget {
 }
 
 class _MyNotesState extends State<MyNotes> {
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

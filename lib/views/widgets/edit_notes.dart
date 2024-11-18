@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
+
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/colors_item.dart';
@@ -89,6 +91,10 @@ class _EditNoteViewState extends State<EditNoteView> {
                   decoration: _inputDecoration('Enter your note title'),
                   style: const TextStyle(color: Colors.white),
                   maxLines: 2,
+                  textDirection: getTextDirection(titleController.text),
+                  onChanged: (_) {
+                    setState(() {});
+                  },
                 ),
                 SizedBox(height: 20.h),
                 TextFormField(
@@ -103,6 +109,10 @@ class _EditNoteViewState extends State<EditNoteView> {
                   decoration: _inputDecoration('Enter your note subtitle'),
                   style: const TextStyle(color: Colors.white),
                   maxLines: 8,
+                  textDirection: getTextDirection(subtitleController.text),
+                  onChanged: (_) {
+                    setState(() {});
+                  },
                 ),
                 SizedBox(height: 30.h),
                 Padding(
@@ -131,32 +141,30 @@ class _EditNoteViewState extends State<EditNoteView> {
                   height: 40.h,
                 ),
                 ElevatedButton(
-  onPressed: () {
-    if (formKey.currentState!.validate()) {
-      formKey.currentState!.save();
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
 
-      final newNote = NoteModel(
-        selectedColor.value,
-        title: title!,
-        subtitle: subtitle!,
-        date: DateFormat('HH:mm    dd-MM-yyyy')
-            .format(DateTime.now()),
-      );
+                      final newNote = NoteModel(
+                        selectedColor.value,
+                        title: title!,
+                        subtitle: subtitle!,
+                        date: DateFormat('HH:mm    dd-MM-yyyy')
+                            .format(DateTime.now()),
+                      );
 
-      var notesBox = Hive.box<NoteModel>(kNotesBok);
-      notesBox.putAt(index!, newNote);
+                      var notesBox = Hive.box<NoteModel>(kNotesBok);
+                      notesBox.putAt(index!, newNote);
 
-      
-      Navigator.pop(context, true);
-    } else {
-      setState(() {
-        autovalidateMode = AutovalidateMode.onUserInteraction;
-      });
-    }
-  },
-  child: const Text('Save'),
-),
-
+                      Navigator.pop(context, true);
+                    } else {
+                      setState(() {
+                        autovalidateMode = AutovalidateMode.onUserInteraction;
+                      });
+                    }
+                  },
+                  child: const Text('Save'),
+                ),
               ],
             ),
           ),
@@ -181,4 +189,11 @@ class _EditNoteViewState extends State<EditNoteView> {
       ),
     );
   }
+}
+
+ui.TextDirection getTextDirection(String text) {
+  final arabicRegex = RegExp(r'[\u0600-\u06FF]');
+  return arabicRegex.hasMatch(text)
+      ? ui.TextDirection.rtl
+      : ui.TextDirection.ltr;
 }

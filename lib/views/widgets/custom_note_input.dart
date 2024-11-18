@@ -56,6 +56,10 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
               decoration: _inputDecoration('Enter your note title'),
               style: const TextStyle(color: kWhiteColor),
               maxLines: 2,
+              textDirection: _getTextDirection(titleController.text),
+              onChanged: (_) {
+                setState(() {});
+              },
             ),
             SizedBox(height: 20.h),
             TextFormField(
@@ -69,6 +73,10 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
               decoration: _inputDecoration('Enter your note subtitle'),
               style: const TextStyle(color: kWhiteColor),
               maxLines: 5,
+              textDirection: _getTextDirection(subtitleController.text),
+              onChanged: (_) {
+                setState(() {});
+              },
             ),
             SizedBox(height: 20.h),
             SizedBox(
@@ -110,6 +118,11 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
         ),
       ),
     );
+  }
+
+  TextDirection _getTextDirection(String text) {
+    final arabicRegex = RegExp(r'[\u0600-\u06FF]');
+    return arabicRegex.hasMatch(text) ? TextDirection.rtl : TextDirection.ltr;
   }
 
   InputDecoration _inputDecoration(String hint) {
