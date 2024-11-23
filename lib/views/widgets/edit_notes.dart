@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/colors_item.dart';
 
@@ -68,7 +69,7 @@ class _EditNoteViewState extends State<EditNoteView> {
         ),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          'Edit Note',
+          S.of(context).edit_Taamulat,
           style: TextStyle(
             color: Theme.of(context).textTheme.bodyLarge?.color,
           ),
@@ -87,11 +88,11 @@ class _EditNoteViewState extends State<EditNoteView> {
                   onSaved: (value) => title = value,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Title is required';
+                      return S.of(context).title_req;
                     }
                     return null;
                   },
-                  decoration: _inputDecoration('Enter your note title'),
+                  decoration: _inputDecoration(S.of(context).title_txt),
                   style: TextStyle(
                       color: Theme.of(context).textTheme.bodyLarge?.color),
                   maxLines: 2,
@@ -106,11 +107,11 @@ class _EditNoteViewState extends State<EditNoteView> {
                   onSaved: (value) => subtitle = value,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Subtitle is required';
+                      return S.of(context).subtitle_req;
                     }
                     return null;
                   },
-                  decoration: _inputDecoration('Enter your note subtitle'),
+                  decoration: _inputDecoration(S.of(context).subtitle_txt),
                   style: TextStyle(
                       color: Theme.of(context).textTheme.bodyLarge?.color),
                   maxLines: 8,
@@ -168,7 +169,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                       });
                     }
                   },
-                  child: const Text('Save'),
+                  child: Text(S.of(context).save_btn),
                 ),
               ],
             ),

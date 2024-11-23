@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nots_app/generated/l10n.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final TextEditingController searchController;
@@ -27,7 +28,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
               TextStyle(color: Theme.of(context).textTheme.bodyLarge?.color),
           filled: true,
           fillColor: Theme.of(context).scaffoldBackgroundColor,
-          hintText: "Search",
+          hintText: S.of(context).search_placeholder,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(12.r)),
           ),

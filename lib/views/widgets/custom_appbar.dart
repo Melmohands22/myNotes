@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/views/search_view.dart';
 import 'package:nots_app/views/widgets/setting_dialog.dart';
 
@@ -21,7 +22,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       title: Padding(
         padding: EdgeInsets.only(left: 8.0.h),
         child: Text(
-          "Notes",
+          S.of(context).title,
           style: TextStyle(
             fontSize: 43.sp,
             fontWeight: FontWeight.w300,

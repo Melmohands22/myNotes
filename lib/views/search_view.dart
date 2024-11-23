@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/custom_note_card.dart';
 import 'package:nots_app/views/widgets/search_appbar.dart';
@@ -17,24 +19,32 @@ class SearchView extends StatefulWidget {
 class _SearchViewState extends State<SearchView> {
   late Box<NoteModel> box;
   List<NoteModel> filteredNotes = [];
-  TextEditingController searchController = TextEditingController();
+  final TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     box = Hive.box<NoteModel>(kNotesBok);
-    filteredNotes = box.values.toList(); 
+    filteredNotes = [];
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
   }
 
   void searchNotes(String query) {
     if (query.isEmpty) {
+     
       setState(() {
-        filteredNotes = box.values.toList(); 
+        filteredNotes = [];
       });
     } else {
+      // Filter notes based on the query
       final notes = box.values.where((note) {
-        return note.title.toLowerCase().contains(query.toLowerCase()) ||
-            note.subtitle.toLowerCase().contains(query.toLowerCase());
+        return (note.title?.toLowerCase() ?? '').contains(query.toLowerCase()) ||
+               (note.subtitle?.toLowerCase() ?? '').contains(query.toLowerCase());
       }).toList();
       setState(() {
         filteredNotes = notes;
@@ -42,31 +52,25 @@ class _SearchViewState extends State<SearchView> {
     }
   }
 
-  void updateNotes() {
-    searchNotes(searchController.text);
-  }
-
   @override
   Widget build(BuildContext context) {
-    final hasNotes = box.isNotEmpty;
-
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: SearchAppBar(
         searchController: searchController,
         onSearch: searchNotes,
       ),
-      body: !hasNotes
+      body: searchController.text.isEmpty
           ? Center(
               child: Text(
-                'No notes available. Add some notes first!',
+                S.of(context).search_intial, 
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                   fontSize: 18.sp,
                 ),
               ),
             )
-          : (filteredNotes.isEmpty && searchController.text.isNotEmpty)
+          : (filteredNotes.isEmpty)
               ? Center(
                   child: Text(
                     'No results found for "${searchController.text}".',
@@ -78,7 +82,7 @@ class _SearchViewState extends State<SearchView> {
                 )
               : NotesGridView(
                   notes: filteredNotes,
-                  onUpdate: updateNotes,
+                  onUpdate: () => searchNotes(searchController.text),
                 ),
     );
   }

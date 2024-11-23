@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/widgets/custom_floating_button.dart';
-import 'package:nots_app/views/widgets/custom_note_card.dart';
-import 'package:nots_app/views/empty_show.dart';
+
 import 'package:nots_app/views/widgets/custom_appbar.dart';
+import 'package:nots_app/views/widgets/no_notes_view.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({
@@ -22,64 +22,24 @@ class _NotesViewState extends State<NotesView> {
   Widget build(BuildContext context) {
     var notesBox = Hive.box<NoteModel>(kNotesBok);
 
-    return Scaffold(
+    return SafeArea(
+        child: Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(),
       body: ValueListenableBuilder(
         valueListenable: notesBox.listenable(),
         builder: (context, Box<NoteModel> box, _) {
-          return Stack(
-            children: [
-              if (box.isEmpty) NoNotesView() else Notes(box: box),
-              const FloatinfButton(),
-            ],
-          );
+          if (box.isEmpty) {
+            return const NoNotesView();
+          } else {
+            return Notes(box: box);
+          }
         },
       ),
-    );
-  }
-}
-
-class NoNotesView extends StatelessWidget {
-  const NoNotesView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        FloatinfButton(),
-        SizedBox(
-          width: double.infinity,
-          child: EmptyShow(),
-        ),
-      ],
-    );
-  }
-}
-
-class Notes extends StatelessWidget {
-  final Box<NoteModel> box;
-
-  const Notes({super.key, required this.box});
-
-  @override
-  Widget build(BuildContext context) {
-    return MasonryGridView.builder(
-      gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(bottom: 60.0.h, right: 16.h),
+        child: const FloatingButton(),
       ),
-      itemCount: box.length,
-      itemBuilder: (context, index) {
-        final note = box.getAt(index) as NoteModel;
-        return CustomNotesCard(
-          note: note,
-          onDelete: () async {
-            await box.deleteAt(index);
-          },
-          index: index,
-          onUpdate: () {},
-        );
-      },
-    );
+    ));
   }
 }

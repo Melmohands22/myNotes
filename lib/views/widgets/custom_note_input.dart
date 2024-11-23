@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nots_app/controllers/utils/custom_button.dart';
+import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/views/widgets/colors_item.dart';
 
 class CustomNoteInput extends StatefulWidget {
@@ -40,7 +41,7 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
       key: formKey,
       autovalidateMode: autovalidateMode,
       child: SizedBox(
-        height: 430.h,
+        height: 480.h,
         width: 300.w,
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -49,11 +50,11 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
               controller: titleController,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Title is required';
+                  return S.of(context).title_req;
                 }
                 return null;
               },
-              decoration: _inputDecoration('Enter your note title'),
+              decoration: _inputDecoration(S.of(context).title_txt),
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
@@ -68,11 +69,11 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
               controller: subtitleController,
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
-                  return 'Subtitle is required';
+                  return S.of(context).subtitle_req;
                 }
                 return null;
               },
-              decoration: _inputDecoration('Enter your note subtitle'),
+              decoration: _inputDecoration(S.of(context).subtitle_txt),
               style: TextStyle(
                 color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
@@ -104,7 +105,7 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
             ),
             SizedBox(height: 20.h),
             AddNoteButton(
-              buttonName: 'Add',
+              buttonName: S.of(context).add_btn,
               formKey: formKey,
               selectedColor: selectedColor,
               titleController: titleController,

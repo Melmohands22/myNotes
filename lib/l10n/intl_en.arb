@@ -1,0 +1,28 @@
+{
+  "title": "Ta'amulat",
+  "settings": "Settings",
+  "dark_mode": "Dark Mode",
+  "language": "Language",
+  "empty_message":"Create your first Ta'amul",
+  "delete_all_notes": "Delete All Ta'amulat",
+  "confirm_delete": "Are you sure you want to delete all Ta'amulat?",
+  "this_action_cannot_be_undone": "This action cannot be undone.",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "search_hint":"Search",
+  "search_placeholder": "What are you searching for?",
+  "search_intial":"No Ta'amulat available. Add some first!",
+  "search_empty":"No results found for",
+  "title_txt":"Enter your Ta'amul title" ,
+  "subtitle_txt":"Enter your Ta'amul Subtitle",
+  "add_btn":"Add Ta'amul",
+  "save_btn":"Save",
+  "ar":"Ar",
+  "en":"En",
+  "edit_Taamulat":"Edit Ta'amulat",
+  "title_req":"Title is required",
+"subtitle_req":"Subtitle is required"
+  
+
+
+}
