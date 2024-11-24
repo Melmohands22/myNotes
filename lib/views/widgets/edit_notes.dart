@@ -159,7 +159,7 @@ class _EditNoteViewState extends State<EditNoteView> {
                             .format(DateTime.now()),
                       );
 
-                      var notesBox = Hive.box<NoteModel>(kNotesBok);
+                      var notesBox = Hive.box<NoteModel>(kNotesBox);
                       notesBox.putAt(index!, newNote);
 
                       Navigator.pop(context, true);

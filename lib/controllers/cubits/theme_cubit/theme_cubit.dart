@@ -1,13 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 
 class ThemeCubit extends Cubit<ThemeMode> {
   ThemeCubit() : super(ThemeMode.light);
 
-  void toggleTheme() {
-    emit(state == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark);
+static const String themeKey = 'app_theme';
+  static const String themeBox = 'themeBox';
+
+  Future<void> loadTheme() async {
+    final box = Hive.box(themeBox);
+    final isDarkMode = box.get(themeKey, defaultValue: false);
+    emit(isDarkMode ? ThemeMode.dark : ThemeMode.light);
   }
+
+  Future<void> toggleTheme() async {
+    final box = Hive.box(themeBox);
+    final isDarkMode = state == ThemeMode.light;
+    emit(isDarkMode ? ThemeMode.dark : ThemeMode.light);
+    await box.put(themeKey, isDarkMode);
+  }
+
+  
 }
+
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.dark,

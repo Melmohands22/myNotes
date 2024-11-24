@@ -13,16 +13,16 @@ import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/notes_view.dart';
 import 'package:nots_app/views/search_view.dart';
 import 'package:nots_app/views/widgets/edit_notes.dart';
+
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Ensures proper initialization.
+  WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
 
   try {
-    await Hive.openBox<NoteModel>(kNotesBok);
-  } catch (e) {
-    print('Hive initialization error: $e');
-  }
+    await Hive.openBox<NoteModel>(kNotesBox);
+    await Hive.openBox(kThemeBox);
+  } catch (e) {}
 
   runApp(const MyNotes());
 }
@@ -35,8 +35,9 @@ class MyNotes extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AddNotesCubit()),
-        BlocProvider(create: (context) => ThemeCubit()),
-        BlocProvider(create: (context) => AppLanguageCubit()..loadSavedLanguage()),
+        BlocProvider(create: (context) => ThemeCubit()..loadTheme()),
+        BlocProvider(
+            create: (context) => AppLanguageCubit()..loadSavedLanguage()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),
@@ -54,7 +55,7 @@ class MyNotes extends StatelessWidget {
                     S.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate, 
                   ],
                   supportedLocales: S.delegate.supportedLocales,
                   theme: lightTheme,

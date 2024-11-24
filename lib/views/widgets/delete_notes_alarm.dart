@@ -91,7 +91,7 @@ class _DeleteNotesAlarmState extends State<DeleteNotesAlarm> {
                       color: Colors.red,
                       textColor: Colors.white,
                       onPressed: () async {
-                        final notesBox = Hive.box<NoteModel>(kNotesBok);
+                        final notesBox = Hive.box<NoteModel>(kNotesBox);
                         await Future.delayed(const Duration(seconds: 2));
                         notesBox.clear();
                         Navigator.of(context).pop();

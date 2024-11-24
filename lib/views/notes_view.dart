@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
+import 'package:nots_app/views/widgets/custom_drawer.dart';
 import 'package:nots_app/views/widgets/custom_floating_button.dart';
 
 import 'package:nots_app/views/widgets/custom_appbar.dart';
@@ -20,12 +21,13 @@ class NotesView extends StatefulWidget {
 class _NotesViewState extends State<NotesView> {
   @override
   Widget build(BuildContext context) {
-    var notesBox = Hive.box<NoteModel>(kNotesBok);
+    var notesBox = Hive.box<NoteModel>(kNotesBox);
 
     return SafeArea(
         child: Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: CustomAppBar(),
+      drawer: CustomDrawer(),
       body: ValueListenableBuilder(
         valueListenable: notesBox.listenable(),
         builder: (context, Box<NoteModel> box, _) {

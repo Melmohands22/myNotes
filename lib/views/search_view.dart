@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -24,7 +23,7 @@ class _SearchViewState extends State<SearchView> {
   @override
   void initState() {
     super.initState();
-    box = Hive.box<NoteModel>(kNotesBok);
+    box = Hive.box<NoteModel>(kNotesBox);
     filteredNotes = [];
   }
 
@@ -36,15 +35,14 @@ class _SearchViewState extends State<SearchView> {
 
   void searchNotes(String query) {
     if (query.isEmpty) {
-     
       setState(() {
         filteredNotes = [];
       });
     } else {
       // Filter notes based on the query
       final notes = box.values.where((note) {
-        return (note.title?.toLowerCase() ?? '').contains(query.toLowerCase()) ||
-               (note.subtitle?.toLowerCase() ?? '').contains(query.toLowerCase());
+        return (note.title.toLowerCase() ?? '').contains(query.toLowerCase()) ||
+            (note.subtitle.toLowerCase() ?? '').contains(query.toLowerCase());
       }).toList();
       setState(() {
         filteredNotes = notes;
@@ -63,7 +61,7 @@ class _SearchViewState extends State<SearchView> {
       body: searchController.text.isEmpty
           ? Center(
               child: Text(
-                S.of(context).search_intial, 
+                S.of(context).search_intial,
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyLarge?.color,
                   fontSize: 18.sp,

@@ -37,7 +37,7 @@ class AddNoteButton extends StatelessWidget {
             date: DateFormat('HH:mm    dd-MM-yyyy').format(DateTime.now()),
           );
 
-          var notesBox = Hive.box<NoteModel>(kNotesBok);
+          var notesBox = Hive.box<NoteModel>(kNotesBox);
           notesBox.add(newNote);
 
           onSaveSuccess();
