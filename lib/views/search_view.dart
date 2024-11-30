@@ -39,7 +39,6 @@ class _SearchViewState extends State<SearchView> {
         filteredNotes = [];
       });
     } else {
-      // Filter notes based on the query
       final notes = box.values.where((note) {
         return (note.title.toLowerCase() ?? '').contains(query.toLowerCase()) ||
             (note.subtitle.toLowerCase() ?? '').contains(query.toLowerCase());
