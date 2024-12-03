@@ -7,7 +7,7 @@ import 'package:nots_app/controllers/cubits/app_language/app_language_cubit.dart
 import 'package:nots_app/controllers/cubits/theme_cubit/theme_cubit.dart';
 import 'package:nots_app/controllers/models/Enums/languagesEventType.dart';
 import 'package:nots_app/generated/l10n.dart';
-import 'package:nots_app/views/widgets/delete_notes_alarm.dart';
+import 'package:nots_app/views/home_view/widgets/delete_notes_alarm.dart';
 
 class SettingDialog extends StatefulWidget {
   const SettingDialog({super.key});

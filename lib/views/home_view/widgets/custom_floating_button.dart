@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nots_app/views/widgets/custom_show_dialog.dart';
+import 'package:nots_app/views/home_view/widgets/custom_show_dialog.dart';
 
 class FloatingButton extends StatefulWidget {
   const FloatingButton({super.key});

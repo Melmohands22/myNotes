@@ -38,13 +38,15 @@ class DaysCard extends StatelessWidget {
               dayNum,
               style: GoogleFonts.lato(
                   color: isSelected ? Colors.white : Colors.black,
-                  fontSize: 24),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w900),
             ),
             Text(
               dayChar,
               style: GoogleFonts.lato(
                   color: isSelected ? Colors.white : Colors.black,
-                  fontSize: 12),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600),
             ),
           ],
         ),

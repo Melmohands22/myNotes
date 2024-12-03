@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hive/hive.dart';
 import 'package:nots_app/models/note_model.dart';
-import 'package:nots_app/views/empty_show.dart';
-import 'package:nots_app/views/widgets/custom_note_card.dart';
+import 'package:nots_app/views/home_view/view/empty_show.dart';
+import 'package:nots_app/views/home_view/widgets/custom_note_card.dart';
 
 class NoNotesView extends StatelessWidget {
   const NoNotesView({super.key});

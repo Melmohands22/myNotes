@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nots_app/generated/l10n.dart';
-import 'package:nots_app/views/search_view.dart';
-import 'package:nots_app/views/tasks_view.dart';
+import 'package:nots_app/views/home_view/view/search_view.dart';
+import 'package:nots_app/views/tasks_view/view/tasks_view.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

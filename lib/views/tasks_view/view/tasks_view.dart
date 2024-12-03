@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:nots_app/views/widgets/days_card.dart';
-import 'package:nots_app/views/widgets/head_tasks_section.dart';
-import 'package:nots_app/views/widgets/sub_tasks_sectiion.dart';
-import 'package:nots_app/views/widgets/tasks_head_icon.dart';
+import 'package:nots_app/views/tasks_view/widgets/botttom_tasks_section.dart';
+import 'package:nots_app/views/tasks_view/widgets/days_card.dart';
+import 'package:nots_app/views/tasks_view/widgets/head_tasks_section.dart';
+import 'package:nots_app/views/tasks_view/widgets/sub_tasks_sectiion.dart';
+import 'package:nots_app/views/tasks_view/widgets/tasks_head_icon.dart';
 
 class TasksView extends StatefulWidget {
   const TasksView({super.key});
@@ -85,20 +84,7 @@ class _TasksViewState extends State<TasksView> {
                 ),
               ],
             ),
-            Positioned(
-              top: 325.h,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: const Color(0xffff439ae1),
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40.r),
-                    topRight: Radius.circular(40.r),
-                  ),
-                ),
-                height: 440.h,
-                width: MediaQuery.of(context).size.width,
-              ),
-            ),
+            BottomTasksSection(),
           ],
         ),
       ),

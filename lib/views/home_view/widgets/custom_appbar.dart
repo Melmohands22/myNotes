@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nots_app/generated/l10n.dart';
-import 'package:nots_app/views/search_view.dart';
-import 'package:nots_app/views/widgets/menu_button.dart';
-import 'package:nots_app/views/widgets/setting_dialog.dart';
+import 'package:nots_app/views/home_view/view/search_view.dart';
+import 'package:nots_app/views/home_view/widgets/menu_button.dart';
+import 'package:nots_app/views/home_view/widgets/setting_dialog.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});

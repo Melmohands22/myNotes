@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:nots_app/views/widgets/custom_note_input.dart';
+import 'package:nots_app/views/home_view/widgets/custom_note_input.dart';
 
 class CustomShowDialog extends StatefulWidget {
   const CustomShowDialog({super.key});

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nots_app/controllers/utils/custom_button.dart';
 import 'package:nots_app/generated/l10n.dart';
-import 'package:nots_app/views/widgets/colors_item.dart';
+import 'package:nots_app/views/home_view/widgets/colors_item.dart';
 
 class CustomNoteInput extends StatefulWidget {
   const CustomNoteInput({super.key});

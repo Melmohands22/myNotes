@@ -4,8 +4,8 @@ import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
-import 'package:nots_app/views/widgets/custom_note_card.dart';
-import 'package:nots_app/views/widgets/search_appbar.dart';
+import 'package:nots_app/views/home_view/widgets/custom_note_card.dart';
+import 'package:nots_app/views/home_view/widgets/search_appbar.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});

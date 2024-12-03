@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
-import 'package:nots_app/views/widgets/custom_drawer.dart';
-import 'package:nots_app/views/widgets/custom_floating_button.dart';
+import 'package:nots_app/views/home_view/widgets/custom_drawer.dart';
+import 'package:nots_app/views/home_view/widgets/custom_floating_button.dart';
 
-import 'package:nots_app/views/widgets/custom_appbar.dart';
-import 'package:nots_app/views/widgets/no_notes_view.dart';
+import 'package:nots_app/views/home_view/widgets/custom_appbar.dart';
+import 'package:nots_app/views/home_view/widgets/no_notes_view.dart';
 
 class NotesView extends StatefulWidget {
   const NotesView({

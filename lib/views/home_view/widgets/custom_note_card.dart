@@ -4,7 +4,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/models/note_model.dart';
-import 'package:nots_app/views/widgets/edit_notes.dart';
+import 'package:nots_app/views/home_view/widgets/edit_notes.dart';
 
 class NotesGridView extends StatelessWidget {
   final List<NoteModel> notes;

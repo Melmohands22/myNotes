@@ -10,10 +10,11 @@ import 'package:nots_app/controllers/cubits/theme_cubit/theme_cubit.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
 
-import 'package:nots_app/views/notes_view.dart';
-import 'package:nots_app/views/search_view.dart';
-import 'package:nots_app/views/tasks_view.dart';
-import 'package:nots_app/views/widgets/edit_notes.dart';
+import 'package:nots_app/views/home_view/view/notes_view.dart';
+import 'package:nots_app/views/home_view/view/search_view.dart';
+import 'package:nots_app/views/tasks_view/view/create_task_view.dart';
+import 'package:nots_app/views/tasks_view/view/tasks_view.dart';
+import 'package:nots_app/views/home_view/widgets/edit_notes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -56,7 +57,7 @@ class MyNotes extends StatelessWidget {
                     S.delegate,
                     GlobalMaterialLocalizations.delegate,
                     GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate, 
+                    GlobalCupertinoLocalizations.delegate,
                   ],
                   supportedLocales: S.delegate.supportedLocales,
                   theme: lightTheme,
@@ -65,7 +66,8 @@ class MyNotes extends StatelessWidget {
                   routes: {
                     EditNoteView.id: (context) => EditNoteView(),
                     SearchView.id: (context) => SearchView(),
-                    TasksView.id:(context)=>TasksView(),
+                    TasksView.id: (context) => TasksView(),
+                    CreateTaskView.id: (context) => CreateTaskView(),
                   },
                   debugShowCheckedModeBanner: false,
                   home: const NotesView(),

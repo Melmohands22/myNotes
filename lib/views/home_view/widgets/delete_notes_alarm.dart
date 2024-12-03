@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
-import 'package:nots_app/views/widgets/conf_button.dart';
+import 'package:nots_app/views/home_view/widgets/conf_button.dart';
 
 class DeleteNotesAlarm extends StatefulWidget {
   const DeleteNotesAlarm({super.key});
