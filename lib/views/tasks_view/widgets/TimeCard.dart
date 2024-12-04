@@ -17,7 +17,7 @@ class TimeCard extends StatelessWidget {
       height: 55.h,
       width: 150.w,
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).iconTheme.color,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(18.r),
           bottomRight: Radius.circular(18.r),
@@ -27,7 +27,7 @@ class TimeCard extends StatelessWidget {
         child: Text(
           formattedTime,
           style: GoogleFonts.lato(
-            color: Theme.of(context).textTheme.bodyLarge?.color,
+            color: Theme.of(context).primaryColor,
             fontSize: 24.sp,
             fontWeight: FontWeight.w900,
           ),

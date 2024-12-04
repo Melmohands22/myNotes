@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nots_app/constants.dart';
 import 'package:nots_app/views/tasks_view/widgets/task_card.dart';
 
 class BottomTasksSection extends StatelessWidget {
@@ -11,7 +12,7 @@ class BottomTasksSection extends StatelessWidget {
       top: 325.h,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xff439ae1),
+          color:  kCustomBlue,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40.r),
             topRight: Radius.circular(40.r),

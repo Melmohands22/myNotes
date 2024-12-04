@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,6 +21,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
+
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarColor: Colors.black,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ),
+  );
 
   try {
     await Hive.openBox<NoteModel>(kNotesBox);
@@ -51,6 +61,22 @@ class MyNotes extends StatelessWidget {
 
             return BlocBuilder<ThemeCubit, ThemeMode>(
               builder: (_, themeMode) {
+                SystemChrome.setSystemUIOverlayStyle(
+                  SystemUiOverlayStyle(
+                    statusBarColor: Colors.transparent,
+                    statusBarIconBrightness: themeMode == ThemeMode.dark
+                        ? Brightness.light
+                        : Brightness.dark,
+                    systemNavigationBarColor: themeMode == ThemeMode.dark
+                        ? Colors.black
+                        : Colors.white,
+                    systemNavigationBarIconBrightness:
+                        themeMode == ThemeMode.dark
+                            ? Brightness.light
+                            : Brightness.dark,
+                  ),
+                );
+
                 return MaterialApp(
                   locale: Locale(currentLanguage),
                   localizationsDelegates: [

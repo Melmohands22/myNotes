@@ -21,7 +21,7 @@ class HeadTasksSection extends StatelessWidget {
             child: Text(
               "My Task",
               style: GoogleFonts.lato(
-                  color: Theme.of(context).cardColor,
+                  color: Theme.of(context).textTheme.bodyLarge?.color,
                   fontSize: 32,
                   fontWeight: FontWeight.w900),
             ),

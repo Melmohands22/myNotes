@@ -27,7 +27,7 @@ class _TasksViewState extends State<TasksView> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).textTheme.bodyLarge?.color,
+                    color: Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(24.r),
                       topRight: Radius.circular(24.r),
@@ -37,18 +37,6 @@ class _TasksViewState extends State<TasksView> {
                   width: MediaQuery.of(context).size.width,
                   child: Stack(
                     children: [
-                      Positioned(
-                        top: -6.h,
-                        right: -41.w,
-                        child: SizedBox(
-                          height: 180.h,
-                          width: 240.w,
-                          child: Image.asset(
-                            "assets/images/3b6aade7-fe10-49dc-a205-a890a277bd9b-removebg-preview.png",
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
                       Column(
                         children: [
                           TasksHeadIcons(),
@@ -91,4 +79,3 @@ class _TasksViewState extends State<TasksView> {
     );
   }
 }
-

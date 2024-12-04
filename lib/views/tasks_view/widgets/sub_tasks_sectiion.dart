@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,7 +16,7 @@ class SubTasksSection extends StatelessWidget {
           child: Text(
             "Today",
             style: GoogleFonts.lato(
-                color: Theme.of(context).cardColor,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
                 fontSize: 24,
                 fontWeight: FontWeight.w700),
           ),
@@ -27,7 +26,11 @@ class SubTasksSection extends StatelessWidget {
           child: Text(
             "Monday , 1 jun ",
             style: GoogleFonts.lato(
-                color: Theme.of(context).cardColor.withOpacity(0.7)),
+                color: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.color
+                    ?.withOpacity(0.7)),
           ),
         )
       ],

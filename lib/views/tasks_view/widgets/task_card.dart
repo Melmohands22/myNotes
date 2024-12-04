@@ -28,7 +28,7 @@ class TaskCard extends StatelessWidget {
             width: 290.w,
             margin: EdgeInsets.symmetric(vertical: 20.h),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Theme.of(context).primaryColor,
               borderRadius: BorderRadius.all(
                 Radius.circular(16.r),
               ),
@@ -55,7 +55,7 @@ class TaskCard extends StatelessWidget {
                         child: Text(
                           title,
                           style: GoogleFonts.lato(
-                            color: Theme.of(context).cardColor,
+                            color: Theme.of(context).textTheme.bodyLarge?.color,
                             fontSize: 24.sp,
                             fontWeight: FontWeight.w900,
                           ),
@@ -69,7 +69,11 @@ class TaskCard extends StatelessWidget {
                         child: Text(
                           subtitle,
                           style: GoogleFonts.lato(
-                            color: Theme.of(context).cardColor.withOpacity(0.4),
+                            color: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.color
+                                ?.withOpacity(0.4),
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w400,
                           ),
