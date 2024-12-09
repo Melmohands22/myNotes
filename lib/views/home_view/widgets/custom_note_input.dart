@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:nots_app/controllers/utils/custom_button.dart';
+import 'package:nots_app/controllers/utils/text_direction.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/views/home_view/widgets/colors_item.dart';
 
@@ -59,7 +60,7 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
                 color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
               maxLines: 2,
-              textDirection: _getTextDirection(titleController.text),
+              textDirection: getTextDirection(titleController.text),
               onChanged: (_) {
                 setState(() {});
               },
@@ -78,7 +79,7 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
                 color: Theme.of(context).textTheme.bodyLarge?.color,
               ),
               maxLines: 5,
-              textDirection: _getTextDirection(subtitleController.text),
+              textDirection: getTextDirection(subtitleController.text),
               onChanged: (_) {
                 setState(() {});
               },
@@ -125,10 +126,7 @@ class _CustomNoteInputState extends State<CustomNoteInput> {
     );
   }
 
-  TextDirection _getTextDirection(String text) {
-    final arabicRegex = RegExp(r'[\u0600-\u06FF]');
-    return arabicRegex.hasMatch(text) ? TextDirection.rtl : TextDirection.ltr;
-  }
+ 
 
   InputDecoration _inputDecoration(String hint) {
     return InputDecoration(

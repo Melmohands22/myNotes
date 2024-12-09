@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:nots_app/controllers/utils/text_direction.dart';
 import 'package:nots_app/generated/l10n.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,7 +21,7 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       title: TextFormField(
-        textDirection: _textDirection(searchController.text),
+        textDirection: getTextDirection(searchController.text),
         controller: searchController,
         onChanged: onSearch,
         decoration: InputDecoration(
@@ -41,7 +42,3 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
-TextDirection _textDirection(String text) {
-  final arabicRegex = RegExp(r'[\u0600-\u06FF]');
-  return arabicRegex.hasMatch(text) ? TextDirection.rtl : TextDirection.ltr;
-}

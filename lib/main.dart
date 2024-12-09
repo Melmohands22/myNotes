@@ -10,6 +10,7 @@ import 'package:nots_app/controllers/cubits/notes_cubit/notes_cubit.dart';
 import 'package:nots_app/controllers/cubits/theme_cubit/theme_cubit.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
+import 'package:nots_app/models/tasks_model.dart';
 
 import 'package:nots_app/views/home_view/view/notes_view.dart';
 import 'package:nots_app/views/home_view/view/search_view.dart';
@@ -21,6 +22,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
+   Hive.registerAdapter(TasksModelAdapter());
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -32,6 +34,7 @@ void main() async {
   );
 
   try {
+     await Hive.openBox<TasksModel>(kTasksBox);
     await Hive.openBox<NoteModel>(kNotesBox);
     await Hive.openBox(kThemeBox);
   } catch (e) {}

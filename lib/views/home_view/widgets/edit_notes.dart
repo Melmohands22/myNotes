@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'dart:ui' as ui;
 
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/controllers/utils/text_direction.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
 import 'package:nots_app/views/home_view/widgets/colors_item.dart';
@@ -197,9 +198,3 @@ class _EditNoteViewState extends State<EditNoteView> {
   }
 }
 
-ui.TextDirection getTextDirection(String text) {
-  final arabicRegex = RegExp(r'[\u0600-\u06FF]');
-  return arabicRegex.hasMatch(text)
-      ? ui.TextDirection.rtl
-      : ui.TextDirection.ltr;
-}

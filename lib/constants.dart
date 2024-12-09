@@ -6,3 +6,4 @@ const kNotesBox = 'notes box';
 const kThemeBox = 'themeBox';
 const kBlueColor = Colors.blue;
 const kCustomBlue = Color(0xff439ae1);
+const kTasksBox = 'tasks box';
