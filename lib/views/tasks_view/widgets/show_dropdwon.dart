@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
+import 'package:nots_app/controllers/cubits/tasks_cubit/tasks_cubit.dart';
 
 final List<String> hoursList = List.generate(
   24,
@@ -11,7 +14,14 @@ final List<String> hoursList = List.generate(
 );
 
 class ShowDropdownButton extends StatefulWidget {
-  const ShowDropdownButton({super.key});
+  const ShowDropdownButton({
+    super.key,
+    required this.isStartTime,
+    required this.onTimeSelected,
+  });
+
+  final bool isStartTime;
+  final ValueChanged<String> onTimeSelected;
 
   @override
   State<ShowDropdownButton> createState() => _ShowDropdownButtonState();
@@ -45,6 +55,7 @@ class _ShowDropdownButtonState extends State<ShowDropdownButton> {
         onChanged: (String? value) {
           setState(() {
             dropdownValue = value!;
+            widget.onTimeSelected(dropdownValue); // Notify parent
           });
         },
         items: hoursList.map<DropdownMenuItem<String>>((String value) {

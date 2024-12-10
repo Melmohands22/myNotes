@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; 
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,6 +7,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:nots_app/constants.dart';
 import 'package:nots_app/controllers/cubits/app_language/app_language_cubit.dart';
 import 'package:nots_app/controllers/cubits/notes_cubit/notes_cubit.dart';
+import 'package:nots_app/controllers/cubits/tasks_cubit/tasks_cubit.dart';
 import 'package:nots_app/controllers/cubits/theme_cubit/theme_cubit.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/note_model.dart';
@@ -22,7 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NoteModelAdapter());
-   Hive.registerAdapter(TasksModelAdapter());
+  Hive.registerAdapter(TasksModelAdapter());
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -34,7 +35,7 @@ void main() async {
   );
 
   try {
-     await Hive.openBox<TasksModel>(kTasksBox);
+    await Hive.openBox<TasksModel>(kTasksBox);
     await Hive.openBox<NoteModel>(kNotesBox);
     await Hive.openBox(kThemeBox);
   } catch (e) {}
@@ -49,6 +50,7 @@ class MyNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => TasksCubit()),
         BlocProvider(create: (context) => AddNotesCubit()),
         BlocProvider(create: (context) => ThemeCubit()..loadTheme()),
         BlocProvider(

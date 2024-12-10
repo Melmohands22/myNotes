@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/controllers/cubits/tasks_cubit/tasks_cubit.dart';
+import 'package:nots_app/models/tasks_model.dart';
 import 'package:nots_app/views/tasks_view/widgets/task_card.dart';
 
 class BottomTasksSection extends StatelessWidget {
@@ -12,7 +16,7 @@ class BottomTasksSection extends StatelessWidget {
       top: 325.h,
       child: Container(
         decoration: BoxDecoration(
-          color:  kCustomBlue,
+          color: kCustomBlue,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(40.r),
             topRight: Radius.circular(40.r),
@@ -20,28 +24,42 @@ class BottomTasksSection extends StatelessWidget {
         ),
         height: 440.h,
         width: MediaQuery.of(context).size.width,
-        child: ListView(
-          padding: EdgeInsets.all(16.r),
-          children: [
-            TaskCard(
-              title: "Team Meeting",
-              subtitle: "Discuss all questions\nabout the new project",
-              image: "assets/images/ddsd.PNG",
-              time: DateTime.now(),
-            ),
-            TaskCard(
-              title: "Call the Stylist",
-              subtitle: "Agree on an evening look",
-              image: "assets/images/rb_6565.png",
-              time: DateTime.now().add(Duration(hours: 1)),
-            ),
-            TaskCard(
-              title: "Shopping List",
-              subtitle: "Buy groceries and snacks",
-              image: "assets/images/rb_6565.png",
-              time: DateTime.now().add(Duration(hours: 2)),
-            ),
-          ],
+        child: BlocBuilder<TasksCubit, List<TasksModel>>(
+          builder: (context, tasks) {
+            if (tasks.isEmpty) {
+              return Center(
+                child: Text(
+                  "No tasks available. Create a new task!",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.sp,
+                  ),
+                ),
+              );
+            }
+
+            return ListView.builder(
+              padding: EdgeInsets.all(16.r),
+              itemCount: tasks.length,
+              itemBuilder: (context, index) {
+                final task = tasks[index];
+
+                DateTime? parsedTime;
+                try {
+                  parsedTime = DateFormat('hh:mm a').parse(task.taskDate);
+                } catch (e) {
+                  debugPrint("Error parsing time: ${task.taskDate}");
+                }
+
+                return TaskCard(
+                  title: task.taskName,
+                  subtitle: task.taskDesc,
+                  image: 'assets/images/ddsd.PNG',
+                  time: parsedTime ?? DateTime.now(),
+                );
+              },
+            );
+          },
         ),
       ),
     );

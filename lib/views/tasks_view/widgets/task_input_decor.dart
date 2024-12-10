@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TaskNameDecoration {
+class TaskInputDecoration {
   static InputDecoration getDecoration({required String hintText}) {
     return InputDecoration(
       hintText: hintText,

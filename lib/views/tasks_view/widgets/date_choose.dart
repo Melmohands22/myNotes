@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:nots_app/constants.dart';
-import 'package:nots_app/views/tasks_view/widgets/task_name_decor.dart';
+import 'package:nots_app/views/tasks_view/widgets/task_input_decor.dart';
 
 class DateChoose extends StatefulWidget {
   const DateChoose({super.key});
@@ -54,7 +54,7 @@ class _DateChooseState extends State<DateChoose> {
                   readOnly: true,
                   style: GoogleFonts.lato(
                       fontSize: 20.sp, fontWeight: FontWeight.w800),
-                  decoration: TaskNameDecoration.getDecoration(
+                  decoration: TaskInputDecoration.getDecoration(
                       hintText: "Select a date"),
                 ),
               ),

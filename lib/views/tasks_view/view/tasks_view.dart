@@ -15,10 +15,11 @@ class TasksView extends StatefulWidget {
 }
 
 class _TasksViewState extends State<TasksView> {
-  int selectedIndex = -1;
+  int selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+    
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: Stack(

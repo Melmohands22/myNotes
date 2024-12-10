@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nots_app/constants.dart';
+import 'package:nots_app/controllers/cubits/tasks_cubit/tasks_cubit.dart';
 import 'package:nots_app/controllers/utils/text_direction.dart';
 import 'package:nots_app/generated/l10n.dart';
 import 'package:nots_app/models/tasks_model.dart';
@@ -10,7 +12,7 @@ import 'package:nots_app/views/tasks_view/widgets/category_card_list_view.dart';
 import 'package:nots_app/views/tasks_view/widgets/create_task_btn.dart';
 import 'package:nots_app/views/tasks_view/widgets/date_choose.dart';
 import 'package:nots_app/views/tasks_view/widgets/show_dropdwon.dart';
-import 'package:nots_app/views/tasks_view/widgets/task_name_decor.dart';
+import 'package:nots_app/views/tasks_view/widgets/task_input_decor.dart';
 
 class CreateTaskView extends StatefulWidget {
   const CreateTaskView({super.key});
@@ -93,14 +95,14 @@ class _CreateTaskViewState extends State<CreateTaskView> {
               padding: const EdgeInsets.only(top: 18.0, left: 18, right: 8),
               child: TextFormField(
                 validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return S.of(context).title_req;
-                }
-                return null;
-              },
+                  if (value == null || value.trim().isEmpty) {
+                    return S.of(context).title_req;
+                  }
+                  return null;
+                },
                 textDirection: getTextDirection(taskNameController.text),
                 controller: taskNameController,
-                decoration: TaskNameDecoration.getDecoration(
+                decoration: TaskInputDecoration.getDecoration(
                     hintText: "Enter Task Name!"),
               ),
             ),
@@ -142,9 +144,24 @@ class _CreateTaskViewState extends State<CreateTaskView> {
                 ),
               ],
             ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [ShowDropdownButton(), ShowDropdownButton()]),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              ShowDropdownButton(
+                isStartTime: true,
+                onTimeSelected: (time) {
+                  setState(() {
+                    selectedStartTime = time;
+                  });
+                },
+              ),
+              ShowDropdownButton(
+                isStartTime: false,
+                onTimeSelected: (time) {
+                  setState(() {
+                    selectedEndTime = time;
+                  });
+                },
+              )
+            ]),
             Padding(
               padding: const EdgeInsets.only(top: 30.0, left: 18),
               child: Text(
@@ -155,19 +172,33 @@ class _CreateTaskViewState extends State<CreateTaskView> {
             Padding(
               padding: const EdgeInsets.only(top: 18.0, left: 18, right: 8),
               child: TextFormField(
-                controller: taskNameController,
-                decoration: TaskNameDecoration.getDecoration(
+                controller: taskDescController,
+                decoration: TaskInputDecoration.getDecoration(
                     hintText: "Enter your description"),
               ),
             ),
             CreateTaskButton(
               onTap: () {
+                if (taskNameController.text.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text("Task name cannot be empty!")),
+                  );
+                  return;
+                }
+
                 final newTask = TasksModel(
                   taskName: taskNameController.text,
                   taskDesc: taskDescController.text,
                   taskDate: selectedStartTime,
                   taskCategory: selectedCategory,
                 );
+
+                context.read<TasksCubit>().addTask(newTask);
+
+                taskNameController.clear();
+                taskDescController.clear();
+
+                Navigator.pop(context);
               },
             ),
           ],
@@ -176,4 +207,3 @@ class _CreateTaskViewState extends State<CreateTaskView> {
     );
   }
 }
-
